@@ -1,0 +1,2 @@
+# store
+ mini_apps
