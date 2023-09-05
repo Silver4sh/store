@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from store_apps.employees import apps
+from store_apps.employees.assets import asset
 
 
 QUEUE = 0
@@ -12,15 +12,15 @@ class employees(models.Model):
     first_name = models.CharField(max_length=50)
     middle_name = models.CharField(max_length=50, default="", blank=True)
     last_name = models.CharField(max_length=50, default="", blank=True)
-    gender = models.CharField(max_length=1, choices=apps.GENDER_CHOICES, default="N")
-    job_title = models.CharField(max_length=3, choices=apps.JOB_TITLE_CHOICES, null=False)
-    placement = models.CharField(max_length=3, choices=apps.PLACEMENT_CHOICES, null=False)
+    gender = models.CharField(max_length=1, choices=asset.GENDER_CHOICES, default="N")
+    job_title = models.CharField(max_length=3, choices=asset.JOB_TITLE_CHOICES, null=False)
+    placement = models.CharField(max_length=3, choices=asset.PLACEMENT_CHOICES, null=False)
     email = models.EmailField(unique=True, blank=True, null=True)
     phone = models.IntegerField(blank=True, null=True)
     address = models.CharField(max_length=100, default="")
     birthday = models.DateField(null=False)
     age = models.PositiveIntegerField(blank=True, null=True, editable=True)
-    is_active = models.CharField(max_length=1, choices=apps.ACTIVE_CHOICE, null=False)
+    is_active = models.CharField(max_length=1, choices=asset.ACTIVE_CHOICE, null=False)
     date_join = models.DateField(editable=False, default=timezone.now)
     edit_date = models.DateField(auto_now=True)
 

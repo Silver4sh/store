@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from store_apps.customers import apps
+from store_apps.customers.assets import asset
 
 QUEUE = 0
 
@@ -27,7 +27,7 @@ class customer(models.Model):
     first_name = models.CharField(max_length=50)
     middle_name = models.CharField(max_length=50, default="", blank=True)
     last_name = models.CharField(max_length=50, default="", blank=True)
-    gender = models.CharField(max_length=1, choices=apps.GENDER_CHOICES, default="N")
+    gender = models.CharField(max_length=1, choices=asset.GENDER_CHOICES, default="N")
     contact = models.OneToOneField(cus_info, on_delete=models.CASCADE, null=True)
     date_join = models.DateField(editable=False, default=timezone.now)
     edit_date = models.DateField(auto_now=True)

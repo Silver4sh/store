@@ -3,13 +3,13 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
 from django.core.validators import MinValueValidator
-from store_apps.inventory import  apps
+from store_apps.inventory.assets import asset
 
 class Inventory(models.Model):
     id_inventory = models.CharField(primary_key=True, max_length=100, editable=False)
     name = models.CharField(max_length=100)
     brand = models.CharField(max_length=100, blank=False)
-    type = models.CharField(max_length=1, choices=apps.TYPE_CHOICES, default="0")
+    type = models.CharField(max_length=1, choices=asset.TYPE_CHOICES, default="0")
     cost = models.DecimalField(max_digits=100, decimal_places=2, validators=[MinValueValidator(0)], blank=False)
     desc = models.CharField(max_length=100000, blank=True, null=True)
     date_add = models.DateField(editable=False, default=timezone.now)
@@ -17,9 +17,9 @@ class Inventory(models.Model):
     def save(self, *args, **kwargs):
         if not self.id_inventory:
             get_type = self.type
-            if get_type in apps.CODE_ITEM:
-                self.id_inventory = get_type + str(apps.CODE_ITEM[get_type])
-                apps.CODE_ITEM[get_type] += 1
+            if get_type in asset.CODE_ITEM:
+                self.id_inventory = get_type + str(asset.CODE_ITEM[get_type])
+                asset.CODE_ITEM[get_type] += 1
         super().save(*args, **kwargs)
 
 class InventoryIn(models.Model):

@@ -1,0 +1,1 @@
+GENDER_CHOICES = (("M", "Male"), ("F", "Female"), ("N", "Don't Choose"))
